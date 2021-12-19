@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+  <head>
+    <title>FIZZ BUZZ: A Coding Project By Derek Holland</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <!-- Prism CSS -->
+    <link rel="stylesheet" href="css/prism.css" />
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <script
+      src="https://kit.fontawesome.com/5db21ba9c6.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./css/site.css" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/favicons/favicon-32x32.png" />
+
+    <!-- === Nav Section === -->
+  </head>
+  <!-- h-100 (height = 100) fills the height of the browser -->
+  <body class="d-flex flex-column h-100">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+      <div class="container-fluid">
+        <img src="img/D-logo-1.svg" class="d-logo-nav" alt="" />
+        <a class="navbar-brand fizz" href="index.html"
+          ><span class="ms-2">FIZZ BUZZ</span></a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse"
+          aria-controls="navbarCollapse"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="app.html">The App</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="code.html"
+                >The Code</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                target="_blank"
+                href="https://github.com/derekholland/Fizz-Buzz"
+                >Git Repo</a
+              >
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" target="_blank" href="#">About</a>
+            </li> -->
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- === Main Section === -->
+    <main class="flex-shrink-0">
+      <div class="container py-4 px-5 mt-5">
+        <h2 class="border-1 border-bottom border-dark">
+          The Code for FIZZ BUZZ.
+        </h2>
+        <div class="row row-cols-1 row-cols-lg-2">
+          <div class="col-lg-8">
+            <pre class="line-numbers">
+                  <code class="language-javascript">
+                    
+                    // fizz buzz
+                    // write a short program that displays each number from 1-100
+                    // for each multiple of 3, display "Fizz" instead of the number
+                    // For each multiple of 5, display "Buzz" instead of the number
+                    // For numbers which are multiples of both 3 and 5 display "FizzBuzz" instead of the number.
+                    
+                    function getValues() {
+                      //get the user input for the fizz number
+                      let fizzValue = document.getElementById("fizzValue").value;
+                      console.log(fizzValue);
+                    
+                      //get the user input for the buzz number
+                      let buzzValue = document.getElementById("buzzValue").value;
+                    
+                      //Convert "fizzValue" to an integer using parseInt()
+                      fizzValue = parseInt(fizzValue);
+                    
+                      //Convert "buzzValue" to an integer using parseInt()
+                      buzzValue = parseInt(buzzValue);
+                    
+                      //validate that the data are integers
+                      if (Number.isInteger(fizzValue) && Number.isInteger(buzzValue)) {
+                        //pass fizzValue and buzzValue to the FizzBuzz function and strore result in variable
+                        let fbData = FizzBuzz(fizzValue, buzzValue);
+                    
+                        //pass fbData to the displayData function, display the fizzbuzz results to the page
+                        displayData(fbData);
+                      } else {
+                        // alert the user only integers must be entered
+                        alert("You must enter integers");
+                      }
+                    }
+                    
+                    function FizzBuzz(value1, value2) {
+                      //create empty array to store the fizzbuzz data
+                      let returnArray = [];
+                    
+                      // iterate through numbers 1-100, checking for fizz buzz values, push numbers and fizzbuzz values into the returnArray
+                      for (let i = 0; i <= 100; i++) {
+                        // if i divisible by 3 and 5
+                        if (i % value1 == 0 && i % value2 == 0) {
+                          // fizzbuzz
+                          returnArray.push("FizzBuzz");
+                        }
+                        // if i is divisible by only 3
+                        else if (i % value1 == 0) {
+                          //fizz
+                          returnArray.push("Fizz");
+                        }
+                        // if i is divisible by only 5
+                        else if (i % value2 == 0) {
+                          //Buzz
+                          returnArray.push("Buzz");
+                          // not divisible by 3 or 5
+                        } else {
+                          // push the  index
+                          returnArray.push(i);
+                        }
+                      }
+                    
+               
+                      return returnArray;
+                    }
+                    
+                    //custom display function
+                    function displayData(fbData) {
+                      //get the table body element from the page
+                      let tableBody = document.getElementById("results");
+                      //get the template row
+                      let templateRow = document.getElementById("fbTemplate");
+                      //clear table first
+                      tableBody.innerHTML = "";
+                    
+                      //loop over the array and create a table row for each item.
+                      for (let i = 1; i <= fbData.length; i += 5) {
+                        //add the className to the element
+                        //imports template as a document fragment to make a copy of the template in memory so it can be modified and added into the table tag in the HTML, content is the tr tag nested inside the template
+                        let tableRow = document.importNode(templateRow.content, true);
+                        // grab the tds and put them into the array
+                        let rowCols = tableRow.querySelectorAll("td");
+                        // add the respective class to each column to change the styling
+                        // set the data for each column
+                        rowCols[0].classList.add(fbData[i]);
+                        rowCols[0].textContent = fbData[i];
+                        //
+                        rowCols[1].classList.add(fbData[i + 1]);
+                        rowCols[1].textContent = fbData[i + 1];
+                        //
+                        rowCols[2].classList.add(fbData[i + 2]);
+                        rowCols[2].textContent = fbData[i + 2];
+                        //
+                        rowCols[3].classList.add(fbData[i + 3]);
+                        rowCols[3].textContent = fbData[i + 3];
+                        //
+                        rowCols[4].classList.add(fbData[i + 4]);
+                        rowCols[4].textContent = fbData[i + 4];
+                        // add the template to the document
+                        tableBody.appendChild(tableRow);
+                      }
+                    }
+            
+                  </code>
+              </pre>
+          </div>
+          <div class="col-lg-4">
+            <p>The code is structured into three functions.</p>
+            <h5>The <strong>getValue() Function</strong></h5>
+            <p>
+              In the HTML file the "Buzz It" button has an event listener
+              attached. When the button is clicked the
+              <strong>getValues()</strong> function is called. This function
+              starts by grabbing the input from the fizz value box and storing
+              the data in the variable <strong>fizzValue</strong>. The buzz
+              value is also stored in the respective
+              <strong>buzzValue</strong> variable. Next the data is converted
+              from string to integer using the
+              <strong>parseInt()</strong> function. An if statement runs to
+              validate that the data in both variables are integers. If both are
+              integers the variables are passed to the
+              <strong>FizzBuzz</strong> function and the returned result is
+              stored in the variable <strong>fbData</strong>, if they are not
+              integers an alert will trigger informing the user to enter only
+              integers.
+            </p>
+            <h5>The <strong>FizzBuzz()</strong> Function</h5>
+            <p>
+              This function accepts two parameters, the fizz and buzz values.
+              When this function is called the first action that takes place is
+              <strong>returnArray</strong> is created and assigned an empty
+              array to store the fizz buzz data. Next a for loop starts at 0 and
+              iterates all the way to 100. During each iteration an if statement
+              determines if the current number is divisible by the fizz value,
+              buzz value, or both. If the number is divisible by the fizz value
+              then the string "Fizz" is pushed into the empty array. If the
+              number is divisible by the buzz value then the string "Buzz" is
+              pushed into the array. If the number is divisible by both then the
+              string "FizzBuzz" is pushed into the array. Finally, if none of
+              these conditions are met the number or index of the current
+              iteration is pushed into the array. This creates the data we will
+              need to display on the page. Finally, the
+              <strong>returnArray</strong> is returned and will be used as an
+              argument when the <strong>displayData()</strong> function is
+              called.
+            </p>
+            <h5>The <strong>Display()</strong> Function</h5>
+            <p>
+              This function takes one argument. The
+              <strong>fbData</strong> array is passed to the function. Next
+              using <strong>document.getElementById</strong> and targeting the
+              "results" id, we can grab the table element and save it to the
+              variable <strong>tableBody</strong>. We use the same technique and
+              target the id "fbTemplate" to get the template element and save
+              the data to the variable <strong>templateRow</strong>. Before
+              moving forward creating the table we clear it by setting the inner
+              HTML of the <strong>tableBody</strong> variable to an empty
+              string. Next we run a loop starting at 1 and iterating to the end
+              of the <strong>fbData</strong> array incrementing by 5. This
+              allows us to create the table data for each item building 5
+              columns at a time.
+            </p>
+
+            <p>
+              The way we set the data is by first importing the template content
+              using <strong>importNode</strong> and then storing that data in
+              the variable <strong>tableRow</strong>. Next we get the columns of
+              the template using <strong>querySelectorAll</strong> and targeting
+              the "td"element. This data is stored in the variable
+              <strong>rowCols</strong>. Using the
+              <strong>rowCols</strong> variable we add a class list with value
+              of the current item. For example if the current item is "Fizz"
+              then the respective class will be added. Back in the CSS document
+              there are styles for Fizz, Buzz, and FizzBuzz to change the way
+              the font color for each is displayed. <strong>rowCols</strong> is
+              also used to set the text content equal to the current item data.
+              This is done for 5 columns during each iteration, creating the
+              full table of 100 items, 5 columns in each row.Finally the
+              <strong>tableBody</strong> has template data for each row appended
+              to the child element. The final result is the a table of numbers
+              from 1-100 with Fizz, Buzz, or FizzBuzz displayed on the page!
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- === Footer Section === -->
+    <footer class="footer mt-auto py-3">
+      <div class="container-fluid">
+        <!-- lg and above 3 columns, below large 1 column -->
+        <div class="row row-cols-1 row-cols-lg-3 gy-2">
+          <!-- column 1 email -->
+          <div
+            class="
+              col
+              order-lg-first order-last
+              text-light
+              d-flex
+              align-items-center
+              justify-content-center
+            "
+          >
+            <div>
+              <span class="text-muted">&copy;2021</span> Derek Holland |
+              derekhollandwebdev@gmail.com
+            </div>
+          </div>
+          <!-- column 2 logo -->
+          <div class="col d-flex align-items-center justify-content-center">
+            <img
+              class="d-logo"
+              src="img/D-logo-1.svg"
+              alt="Derek Holland logo"
+            />
+          </div>
+          <!-- column 3 social icons -->
+          <div class="col d-flex align-items-center justify-content-center">
+            <div class="row">
+              <div class="col social">
+                <a
+                  href="https://linkedin.com/in/derek-holland-93ab0617b/"
+                  target="_blank"
+                  ><i class="fab fa-linkedin fa-2x"></i
+                ></a>
+              </div>
+              <div class="col social">
+                <a href="https://github.com/derekholland" target="_blank"
+                  ><i class="fab fa-github fa-2x"></i
+                ></a>
+              </div>
+              <div class="col social">
+                <a href="#" target="_blank"
+                  ><i class="fab fa-twitter fa-2x"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/site.js"></script>
+    <!-- Prism JS -->
+    <script src="js/prism.js"></script>
+    <script>
+      Prism.plugins.NormalizeWhitespace.setDefaults({
+        "remove-trailing": true,
+        "remove-indent": true,
+        "left-trim": true,
+        "right-trim": true,
+      });
+    </script>
+  </body>
+</html>
