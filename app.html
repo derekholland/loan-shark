@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
   <head>
-    <title>FIZZ BUZZ: A Coding Project By Derek Holland</title>
+    <title>LOAN SHARK: A Coding Project By Derek Holland</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -39,7 +39,7 @@
       <div class="container-fluid">
         <img src="img/D-logo-1.svg" class="d-logo-nav" alt="" />
         <a class="navbar-brand fizz" href="index.html">
-          <span class="ms-2">FIZZ BUZZ</span></a
+          <span class="ms-2">LOAN SHARK</span></a
         >
 
         <button
@@ -68,7 +68,7 @@
               <a
                 class="nav-link"
                 target="_blank"
-                href="https://github.com/derekholland/Fizz-Buzz"
+                href="https://github.com/derekholland/LOAN"
                 >Git Repo</a
               >
             </li>
@@ -82,66 +82,111 @@
     <!-- === Main Section === -->
     <main class="flex-shrink-0">
       <div class="container px-4 py-5">
+        <!-- Main Row -->
         <div class="row py-5 g-5 row-cols-1 row-cols-lg-2">
-          <!-- coumn 1 -->
-          <div class="col">
-            <h1>FIZZ BUZZ</h1>
-            <h4 class="lead pb-3">
-              There and back again. A javascript coding exercise using arrays.
-              Write a program that displays a string in reverse.
-            </h4>
-            <div class="row">
-              <hr />
-              <h2 class="mt-5 border-bottom border-2">Instructions</h2>
-              <h4 class="lead pb-3">
-                Write a short program that displays each number from 1-100. For
-                each multiple of 3, display "Fizz" instead of the number. For
-                each multiple of 5, display "Buzz" instead of the number. For
-                numbers which are multiples of both 3 and 5 display "FizzBuzz"
-                instead of the number.
-              </h4>
-            </div>
-          </div>
-          <!-- column 2 -->
-          <div class="col">
-            <!-- row -->
-            <form action="" class="row gx-3">
+          <!-- Main coumn 1 Inputs -->
+          <div class="col-3 border border-dark">
+            <!-- <h2 class="mt-5 border-bottom border-2">Instructions</h2> -->
+            <!-- <h4 class="lead pb-3"></h4> -->
+            <form action="" class="row gx-3 mt-4">
               <!-- column 1 -->
-              <div class="col-6">
-                <h5>Enter a Fizz number</h5>
+              <div class="row gx-3">
+                <div class="col-6">
+                  <h5>Loan Amount</h5>
+                </div>
+                <div class="col-6">
+                  <input
+                    type="text"
+                    id="fizzValue"
+                    class="form-control"
+                    placeholder="Start Value"
+                    value="3"
+                    aria-label="Start Value"
+                  />
+                </div>
+              </div>
 
-                <input
-                  type="text"
-                  id="fizzValue"
-                  class="form-control"
-                  placeholder="Start Value"
-                  value="3"
-                  aria-label="Start Value"
-                />
+              <div class="row gx-3 mt-2">
+                <div class="col-6">
+                  <h5>Term (Months)</h5>
+                </div>
+                <div class="col-6">
+                  <input
+                    type="text"
+                    id="fizzValue"
+                    class="form-control"
+                    placeholder="Start Value"
+                    value="3"
+                    aria-label="Start Value"
+                  />
+                </div>
               </div>
-              <div class="col-6">
-                <h5>Enter a Fizz number</h5>
-                <input
-                  type="text"
-                  id="buzzValue"
-                  class="form-control"
-                  placeholder="Start Value"
-                  value="5"
-                  aria-label="Start Value"
-                />
-              </div>
-              <!-- column 2 -->
-              <div class="col-12 d-flex justify-content-end">
-                <button
-                  type="button"
-                  id="btnSubmit"
-                  class="btn btn-dark mt-2 btn-lg"
-                >
-                  Buzz It
-                </button>
+              <div class="row gx-3 mt-2">
+                <div class="col-6">
+                  <h5>Interest Rate</h5>
+                </div>
+                <div class="col-6">
+                  <input
+                    type="text"
+                    id="fizzValue"
+                    class="form-control"
+                    placeholder="Start Value"
+                    value="3"
+                    aria-label="Start Value"
+                  />
+                </div>
+                <!-- Button -->
+
+                <div class="col-12 d-flex justify-content-end mt-5">
+                  <button
+                    type="button"
+                    id="btnSubmit"
+                    class="btn btn-dark mt-5 btn-lg"
+                  >
+                    Calculate
+                  </button>
+                </div>
               </div>
             </form>
-            <h2 class="mt-5 border-bottom border-2">Results</h2>
+          </div>
+
+          <!-- Main column 2 -->
+          <div class="col-9 border border-dark">
+            <!-- Monthly Payments (center) -->
+            <div class="row mt-2">
+              <h1 class="text-center">Your Monthly Payments</h1>
+            </div>
+            <!-- Amount -->
+            <div class="row my-5 py-2">
+              <h2 class="text-center">$471.78</h2>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h3>Total Principal</h3>
+              </div>
+              <div class="col d-flex justify-content-end">
+                <h3>$25,000.00</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h3>Total Interest</h3>
+              </div>
+              <div class="col d-flex justify-content-end">
+                <h3>$3,306.85</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h3>Total Cost</h3>
+              </div>
+              <div class="col d-flex justify-content-end">
+                <h3>$28,306.85</h3>
+              </div>
+            </div>
+          </div>
+          <!-- Table -->
+          <div class="col-8">
             <div class="table-responsive">
               <table class="table table-striped table-sm">
                 <tbody id="results">
@@ -149,6 +194,7 @@
                 </tbody>
               </table>
             </div>
+            <!-- end of column -->
           </div>
         </div>
       </div>
