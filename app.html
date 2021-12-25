@@ -82,109 +82,126 @@
     <!-- === Main Section === -->
     <main class="flex-shrink-0">
       <div class="container px-4 py-5">
-        <!-- Main Row -->
-        <div class="row py-5 g-5 row-cols-1 row-cols-lg-2">
+        <!-- Main row for 2 column layout  -->
+        <div class="row py-5 gy-5">
           <!-- Main coumn 1 Inputs -->
-          <div class="col-3 border border-dark">
-            <!-- <h2 class="mt-5 border-bottom border-2">Instructions</h2> -->
-            <!-- <h4 class="lead pb-3"></h4> -->
-            <form action="" class="row gx-3 mt-4">
+          <div class="col-4 border border-dark me-3 p-4">
+            <form action="" class="row mt-4">
               <!-- column 1 -->
-              <div class="row gx-3">
-                <div class="col-6">
-                  <h5>Loan Amount</h5>
+              <div class="wrapper m-1 p-1">
+                <div class="row gx-3 mt-2 m-1">
+                  <div class="col-6">
+                    <h5>Loan Amount</h5>
+                  </div>
+                  <div class="col-6">
+                    <input
+                      type="text"
+                      id="loanValue"
+                      class="form-control"
+                      placeholder="Start Value"
+                      value="25000"
+                      aria-label="Start Value"
+                    />
+                  </div>
                 </div>
-                <div class="col-6">
-                  <input
-                    type="text"
-                    id="fizzValue"
-                    class="form-control"
-                    placeholder="Start Value"
-                    value="3"
-                    aria-label="Start Value"
-                  />
+
+                <div class="row gx-3 mt-2 m-1">
+                  <div class="col-6">
+                    <h5>Term (Months)</h5>
+                  </div>
+                  <div class="col-6">
+                    <input
+                      type="text"
+                      id="termValue"
+                      class="form-control"
+                      placeholder="Start Value"
+                      value="60"
+                      aria-label="Start Value"
+                    />
+                  </div>
+                </div>
+                <div class="row gx-3 mt-2 m-1">
+                  <div class="col-6">
+                    <h5>Interest Rate</h5>
+                  </div>
+                  <div class="col-6">
+                    <input
+                      type="text"
+                      id="interestValue"
+                      class="form-control"
+                      placeholder="Start Value"
+                      value="3"
+                      aria-label="Start Value"
+                    />
+                  </div>
                 </div>
               </div>
 
-              <div class="row gx-3 mt-2">
-                <div class="col-6">
-                  <h5>Term (Months)</h5>
-                </div>
-                <div class="col-6">
-                  <input
-                    type="text"
-                    id="fizzValue"
-                    class="form-control"
-                    placeholder="Start Value"
-                    value="3"
-                    aria-label="Start Value"
-                  />
-                </div>
-              </div>
-              <div class="row gx-3 mt-2">
-                <div class="col-6">
-                  <h5>Interest Rate</h5>
-                </div>
-                <div class="col-6">
-                  <input
-                    type="text"
-                    id="fizzValue"
-                    class="form-control"
-                    placeholder="Start Value"
-                    value="3"
-                    aria-label="Start Value"
-                  />
-                </div>
-                <!-- Button -->
+              <!-- Button -->
+              <div class="row mt-5 gx-3 mt-2 m-1">
+                <div class="col-6"></div>
 
-                <div class="col-12 d-flex justify-content-end mt-5">
-                  <button
-                    type="button"
-                    id="btnSubmit"
-                    class="btn btn-dark mt-5 btn-lg"
-                  >
-                    Calculate
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  id="btnCalc"
+                  class="col-6 btn btn-dark mt-5 btn-lg"
+                >
+                  Calculate
+                </button>
+              </div>
+              <!-- Refresh Button -->
+              <div class="row gx-3 mt-2 m-1">
+                <div class="col-6"></div>
+                <button
+                  type="button"
+                  id="btnRefresh"
+                  class="col-6 btn btn-danger btn-lg"
+                >
+                  Reset
+                </button>
               </div>
             </form>
           </div>
 
           <!-- Main column 2 -->
-          <div class="col-9 border border-dark">
+          <div class="col-7 border border-dark ms-1">
             <!-- Monthly Payments (center) -->
             <div class="row mt-2">
               <h1 class="text-center">Your Monthly Payments</h1>
             </div>
+
             <!-- Amount -->
             <div class="row my-5 py-2">
               <h2 class="text-center">$471.78</h2>
             </div>
-            <div class="row">
-              <div class="col">
-                <h3>Total Principal</h3>
+            <div class="wrapper-div m-2 p-2">
+              <div class="row">
+                <div class="col">
+                  <h4>Total Principal</h4>
+                </div>
+                <div class="col d-flex justify-content-end">
+                  <h4>$25,000.00</h4>
+                </div>
               </div>
-              <div class="col d-flex justify-content-end">
-                <h3>$25,000.00</h3>
+              <div class="row">
+                <div class="col">
+                  <h4>Total Interest</h4>
+                </div>
+                <div class="col d-flex justify-content-end">
+                  <h4>$3,306.85</h4>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <h3>Total Interest</h3>
-              </div>
-              <div class="col d-flex justify-content-end">
-                <h3>$3,306.85</h3>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <h3>Total Cost</h3>
-              </div>
-              <div class="col d-flex justify-content-end">
-                <h3>$28,306.85</h3>
+              <div class="row">
+                <div class="col">
+                  <h4>Total Cost</h4>
+                </div>
+                <div class="col d-flex justify-content-end">
+                  <h4>$28,306.85</h4>
+                </div>
               </div>
             </div>
           </div>
+
           <!-- Table -->
           <div class="col-8">
             <div class="table-responsive">
@@ -193,10 +210,14 @@
                   <!-- Results Go Here -->
                 </tbody>
               </table>
+              <!-- end of div -->
             </div>
             <!-- end of column -->
           </div>
+
+          <!--end of main row div  -->
         </div>
+        <!-- end of main container div -->
       </div>
     </main>
     <!-- === Footer Section === -->
@@ -272,7 +293,10 @@
     ></script>
     <script src="js/site.js"></script>
     <script>
-      document.getElementById("btnSubmit").addEventListener("click", getValues);
+      document.getElementById("btnCalc").addEventListener("click", getValues);
+      document
+        .getElementById("btnRefresh")
+        .addEventListener("click", refreshApp);
     </script>
   </body>
 </html>
