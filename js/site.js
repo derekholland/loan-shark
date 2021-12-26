@@ -39,11 +39,12 @@ function getValues() {
     Number.isInteger(rate)
   ) {
     // call the calculate function and save returned results to a variable
-    mortgageData = calculateValues(loan, term, rate);
+    displayData = calculateValues(loan, term, rate);
+    console.log(displayData);
+    // pass display data to the display function
   } else {
     alert("You must enter only integers");
   }
-  // pass the mortgageData variable to displayData to show the results on the screen
 }
 
 function calculateValues(loan, term, rate) {
@@ -60,6 +61,9 @@ function calculateValues(loan, term, rate) {
   let interestPayment = 0;
   // Principal Payment = Total Monthly Payment - Interest Payment
   let principalPayment = 0;
+  let totalInterest = 0;
+  let totalCost = 0;
+  let totalPrincipal = 0;
 
   // loop through the length of the term and calculate monthly data
   for (let i = 1; i <= term; i++) {
@@ -68,10 +72,15 @@ function calculateValues(loan, term, rate) {
     if (remainingBalance <= 0) {
       remainingBalance = 0;
     }
+    // calculate interestPayment
     interestPayment = remainingBalance * (rate / 1200);
+    // calculate principal payment
     principalPayment = monthlyPayment - interestPayment;
+    // add up the total interest
+    totalInterest += interestPayment;
+    // add up the total principal
+    totalPrincipal += principalPayment;
     //create data objects for each month
-
     const month = {
       month: i,
       payment: monthlyPayment.toFixed(2),
@@ -79,18 +88,25 @@ function calculateValues(loan, term, rate) {
       principal: principalPayment.toFixed(2),
       total: remainingBalance.toFixed(2),
     };
-    console.log(month);
+    // console.log(month);
     mortgageData.push(month);
   }
-  let totalPrincipal;
-  let totalInterest;
-  let totalCost;
 
-  return mortgageData;
+  // add up total costs
+  totalCost += totalInterest + loan;
+
+  let headerData = {
+    monthlyPayment: `$${monthlyPayment.toFixed(2)}`,
+    totalPrincipal: `$${totalPrincipal.toFixed(2)}`,
+    totalInterest: `$${totalInterest.toFixed(2)}`,
+    totalCost: `$${totalCost.toFixed(2)}`,
+  };
+  console.log(headerData);
+  return headerData, mortgageData;
 }
 
 //custom display function
-function displayData(mortgageData) {
+function displayData(displayData) {
   //get the table body element from the page
   let tableBody = document.getElementById("results");
   //get the template row
