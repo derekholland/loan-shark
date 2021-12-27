@@ -38,10 +38,8 @@ function getValues() {
     Number.isInteger(term) &&
     Number.isInteger(rate)
   ) {
-    // call the calculate function and save returned results to a variable
-    pageData = calculateValues(loan, term, rate);
-    // pass display data to the display function
-    displayData(pageData);
+    // call the calculate function
+    calculateValues(loan, term, rate);
   } else {
     alert("You must enter only integers");
   }
@@ -49,7 +47,7 @@ function getValues() {
 
 function calculateValues(loan, term, rate) {
   // create the array of data showing the amorization schedule for each month
-  let mortgageData = [];
+  let scheduleData = [];
 
   // Total Monthly Payment = (amount loaned) * (interestRate/1200) / (1 – (1 + interestRate/1200)
   let monthlyPayment =
@@ -88,55 +86,48 @@ function calculateValues(loan, term, rate) {
       principal: principalPayment.toFixed(2),
       total: remainingBalance.toFixed(2),
     };
-    mortgageData.push(month);
+    scheduleData.push(month);
   }
 
   // add up total costs
   totalCost += totalInterest + loan;
 
-  // let headerData = {
-  //   monthlyPayment: `$${monthlyPayment.toFixed(2)}`,
-  //   totalPrincipal: `$${totalPrincipal.toFixed(2)}`,
-  //   totalInterest: `$${totalInterest.toFixed(2)}`,
-  //   totalCost: `$${totalCost.toFixed(2)}`,
-  // };
-  //push the header data object to the mortgage data array
-  // mortgageData.push(headerData);
-
-  return mortgageData;
+  let headerData = {
+    monthlyPayment: `$${monthlyPayment.toFixed(2)}`,
+    totalPrincipal: `$${totalPrincipal.toFixed(2)}`,
+    totalInterest: `$${totalInterest.toFixed(2)}`,
+    totalCost: `$${totalCost.toFixed(2)}`,
+  };
+  //pass data to displayData to output results on the screen
+  displayData(scheduleData, headerData);
 }
 
 //custom display function
-function displayData(pageData) {
-  console.log(pageData);
+function displayData(scheduleData, headerData) {
+  // change the header Data
+
+  // get the monthly payment
+  let headerPayment = document.getElementById("monthlyPayment");
+  // set the inner HTML to the monthly payment
+  headerPayment.innerHTML = headerData.monthlyPayment;
+  // get the total principal
+  let headerPrincipal = document.getElementById("totalPrincipal");
+  // set the inner HTMl
+  headerPrincipal.innerHTML = headerData.totalPrincipal;
+  let headerInterest = document.getElementById("totalInterest");
+  // set the inner HTML
+  headerInterest.innerHTML = headerData.totalInterest;
+  let headerCost = document.getElementById("totalCost");
+  // set the inner HTML
+  headerCost.innerHTML = headerData.totalCost;
+
   //get the table body element from the page
   let tableBody = document.getElementById("results");
   //get the template row
   let templateRow = document.getElementById("lsTemplate");
   let fullTable = document.getElementById("table");
-  //clear table first
-  // tableBody.innerHTML = "";
-
-  // // change the header Data
-  // // get the header object
-  // let header = pageData[pageData.length - 1];
-  // // get the monthly payment
-  // let headerPayment = document.getElementById("monthlyPayment");
-  // // set the inner HTML to the monthly payment
-  // headerPayment.innerHTML = header.monthlyPayment;
-  // // get the total principal
-  // let headerPrincipal = document.getElementById("totalPrincipal");
-  // // set the inner HTMl
-  // headerPrincipal.innerHTML = header.totalPrincipal;
-  // let headerInterest = document.getElementById("totalInterest");
-  // // set the inner HTML
-  // headerInterest.innerHTML = header.totalInterest;
-  // let headerCost = document.getElementById("totalCost");
-  // // set the inner HTML
-  // headerCost.innerHTML = header.totalCost;
-
   // loop over the array and create a table row for each item.
-  for (let i = 0; i < pageData.length; i++) {
+  for (let i = 0; i < scheduleData.length; i++) {
     //   //add the className to the element
     //   //imports template as a document fragment to make a copy of the template in memory so it can be modified and added into the table tag in the HTML, content is the tr tag nested inside the template
     let tableRow = document.importNode(templateRow.content, true);
@@ -146,22 +137,19 @@ function displayData(pageData) {
     //   // set the data for each column
     // rowCols[0].classList.add(pageData[i]);
 
-    rowCols[0].textContent = pageData[i].month;
+    rowCols[0].textContent = scheduleData[i].month;
     //   //
     // rowCols[1].classList.add(mortgageData[i + 1][i + 1]);
-    rowCols[1].textContent = pageData[i + 1].payment;
+    rowCols[1].textContent = scheduleData[i].payment;
     //   //
     // rowCols[2].classList.add(pageData[i + 2][i + 2]);
-    rowCols[2].textContent = pageData[i + 2].interest;
+    rowCols[2].textContent = scheduleData[i].interest;
     //   //
     // rowCols[3].classList.add(pageData[i + 3][i + 3]);
-    rowCols[3].textContent = pageData[i + 3].principal;
+    rowCols[3].textContent = scheduleData[i].principal;
     //   //
     // rowCols[4].classList.add(pageData[i + 4][i + 4]);
-    rowCols[4].textContent = pageData[i + 4].total;
-    //   //
-    // rowCols[4].classList.add(pageData[i + 5][i + 5]);
-    // rowCols[4].textContent = pageData[i + 5][i + 5];
+    rowCols[4].textContent = scheduleData[i].total;
 
     // add the template to the document
     tableBody.appendChild(tableRow);
