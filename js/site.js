@@ -39,9 +39,9 @@ function getValues() {
     Number.isInteger(rate)
   ) {
     // call the calculate function and save returned results to a variable
-    displayData = calculateValues(loan, term, rate);
-    console.log(displayData);
+    pageData = calculateValues(loan, term, rate);
     // pass display data to the display function
+    displayData(pageData);
   } else {
     alert("You must enter only integers");
   }
@@ -88,60 +88,83 @@ function calculateValues(loan, term, rate) {
       principal: principalPayment.toFixed(2),
       total: remainingBalance.toFixed(2),
     };
-    // console.log(month);
     mortgageData.push(month);
   }
 
   // add up total costs
   totalCost += totalInterest + loan;
 
-  let headerData = {
-    monthlyPayment: `$${monthlyPayment.toFixed(2)}`,
-    totalPrincipal: `$${totalPrincipal.toFixed(2)}`,
-    totalInterest: `$${totalInterest.toFixed(2)}`,
-    totalCost: `$${totalCost.toFixed(2)}`,
-  };
-  console.log(headerData);
-  return headerData, mortgageData;
+  // let headerData = {
+  //   monthlyPayment: `$${monthlyPayment.toFixed(2)}`,
+  //   totalPrincipal: `$${totalPrincipal.toFixed(2)}`,
+  //   totalInterest: `$${totalInterest.toFixed(2)}`,
+  //   totalCost: `$${totalCost.toFixed(2)}`,
+  // };
+  //push the header data object to the mortgage data array
+  // mortgageData.push(headerData);
+
+  return mortgageData;
 }
 
 //custom display function
-function displayData(displayData) {
+function displayData(pageData) {
+  console.log(pageData);
   //get the table body element from the page
   let tableBody = document.getElementById("results");
   //get the template row
   let templateRow = document.getElementById("lsTemplate");
+  let fullTable = document.getElementById("table");
   //clear table first
-  tableBody.innerHTML = "";
+  // tableBody.innerHTML = "";
 
-  //loop over the array and create a table row for each item.
-  for (let i = 1; i <= mortgageData.length; i += 5) {
-    //add the className to the element
-    //imports template as a document fragment to make a copy of the template in memory so it can be modified and added into the table tag in the HTML, content is the tr tag nested inside the template
+  // // change the header Data
+  // // get the header object
+  // let header = pageData[pageData.length - 1];
+  // // get the monthly payment
+  // let headerPayment = document.getElementById("monthlyPayment");
+  // // set the inner HTML to the monthly payment
+  // headerPayment.innerHTML = header.monthlyPayment;
+  // // get the total principal
+  // let headerPrincipal = document.getElementById("totalPrincipal");
+  // // set the inner HTMl
+  // headerPrincipal.innerHTML = header.totalPrincipal;
+  // let headerInterest = document.getElementById("totalInterest");
+  // // set the inner HTML
+  // headerInterest.innerHTML = header.totalInterest;
+  // let headerCost = document.getElementById("totalCost");
+  // // set the inner HTML
+  // headerCost.innerHTML = header.totalCost;
+
+  // loop over the array and create a table row for each item.
+  for (let i = 0; i < pageData.length; i++) {
+    //   //add the className to the element
+    //   //imports template as a document fragment to make a copy of the template in memory so it can be modified and added into the table tag in the HTML, content is the tr tag nested inside the template
     let tableRow = document.importNode(templateRow.content, true);
-    // grab the tds and put them into the array
+    //   // grab the tds and put them into the array
     let rowCols = tableRow.querySelectorAll("td");
-    // add the respective class to each column to change the styling
-    // set the data for each column
-    // rowCols[0].classList.add(mortgageData[i]);
-    rowCols[0].textContent = mortgageData[i];
-    //
-    // rowCols[1].classList.add(mortgageData[i + 1]);
-    rowCols[1].textContent = mortgageData[i + 1];
-    //
-    // rowCols[2].classList.add(mortgageData[i + 2]);
-    rowCols[2].textContent = mortgageData[i + 2];
-    //
-    // rowCols[3].classList.add(mortgageData[i + 3]);
-    rowCols[3].textContent = mortgageData[i + 3];
-    //
-    // rowCols[4].classList.add(mortgageData[i + 4]);
-    rowCols[4].textContent = mortgageData[i + 4];
-    //
-    // rowCols[4].classList.add(mortgageData[i + 5]);
-    rowCols[4].textContent = mortgageData[i + 5];
+    //   // add the respective class to each column to change the styling
+    //   // set the data for each column
+    // rowCols[0].classList.add(pageData[i]);
+
+    rowCols[0].textContent = pageData[i].month;
+    //   //
+    // rowCols[1].classList.add(mortgageData[i + 1][i + 1]);
+    rowCols[1].textContent = pageData[i + 1].payment;
+    //   //
+    // rowCols[2].classList.add(pageData[i + 2][i + 2]);
+    rowCols[2].textContent = pageData[i + 2].interest;
+    //   //
+    // rowCols[3].classList.add(pageData[i + 3][i + 3]);
+    rowCols[3].textContent = pageData[i + 3].principal;
+    //   //
+    // rowCols[4].classList.add(pageData[i + 4][i + 4]);
+    rowCols[4].textContent = pageData[i + 4].total;
+    //   //
+    // rowCols[4].classList.add(pageData[i + 5][i + 5]);
+    // rowCols[4].textContent = pageData[i + 5][i + 5];
 
     // add the template to the document
     tableBody.appendChild(tableRow);
+    fullTable.classList.remove("invisible");
   }
 }
