@@ -69,7 +69,7 @@ function calculateValues(loan, term, rate) {
       payment: monthlyPayment.toFixed(2),
       interest: interestPayment.toFixed(2),
       principal: principalPayment.toFixed(2),
-      total: remainingBalance.toFixed(2),
+      total: remainingBalance.toFixed(2)
     };
     // push each month object to the scheduleData array
     scheduleData.push(month);
@@ -82,7 +82,7 @@ function calculateValues(loan, term, rate) {
     monthlyPayment: `$${monthlyPayment.toFixed(2)}`,
     totalPrincipal: `$${totalPrincipal.toFixed(2)}`,
     totalInterest: `$${totalInterest.toFixed(2)}`,
-    totalCost: `$${totalCost.toFixed(2)}`,
+    totalCost: `$${totalCost.toFixed(2)}`
   };
   //pass data to displayData to output results on the screen
   displayData(scheduleData, headerData);

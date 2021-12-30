@@ -95,142 +95,145 @@
                   <code class="language-javascript">
                     // Mortgage Loan Calculator
 
-// write a mortgage loan calculator that takes loan amount, months, and interest rate and prints out the amorization schedule which includes month by month the month, payment, principal, interest, total interest, and balance remaining
+                    // Mortgage Loan Calculator
 
-// refresh button
-function refreshApp() {
-  location.reload();
-}
-
-// write a function that gets all of the values
-function getValues() {
-  // get the loan value
-  let loan = document.getElementById("loanValue").value;
-  // get the term value
-  let term = document.getElementById("termValue").value;
-  // get the interest rate value
-  let rate = document.getElementById("interestValue").value;
-  // convert values to integers
-  loan = parseInt(loan);
-  term = parseInt(term);
-  rate = parseInt(rate);
-  // test if values are integers
-  if (
-    Number.isInteger(loan) &&
-    Number.isInteger(term) &&
-    Number.isInteger(rate)
-  ) {
-    // call the calculate function
-    calculateValues(loan, term, rate);
-  } else {
-    alert("You must enter only integers");
-  }
-}
-
-function calculateValues(loan, term, rate) {
-  // create the array of data showing the amorization schedule for each month
-  let scheduleData = [];
-  // Total Monthly Payment = (amount loaned) * (interestRate/1200) / (1 – (1 + interestRate/1200)
-  let monthlyPayment =
-    (loan * (rate / 1200)) / (1 - (1 + rate / 1200) ** -term);
-  // Remaining Balance before the very first month equals the amount of the loan.
-  let remainingBalance = loan;
-  //Create variables to store the calculations
-  let interestPayment = 0;
-  let principalPayment = 0;
-  let totalInterest = 0;
-  let totalCost = 0;
-  let totalPrincipal = 0;
-
-  // loop through the length of the term and calculate monthly data
-  for (let i = 1; i <= term; i++) {
-    // At end each month, Remaining Balance = Previous Remaining Balance - principal payments
-    remainingBalance = remainingBalance - principalPayment;
-    // keep from going below zero
-    if (remainingBalance <= 0) {
-      remainingBalance = 0;
-    }
-    // calculate interestPayment
-    interestPayment = remainingBalance * (rate / 1200);
-    // calculate principal payment
-    principalPayment = monthlyPayment - interestPayment;
-    // add up the total interest
-    totalInterest += interestPayment;
-    // add up the total principal
-    totalPrincipal += principalPayment;
-    //create data objects for each month
-    const month = {
-      month: i,
-      payment: monthlyPayment.toFixed(2),
-      interest: interestPayment.toFixed(2),
-      principal: principalPayment.toFixed(2),
-      total: remainingBalance.toFixed(2),
-    };
-    // push each month object to the scheduleData array
-    scheduleData.push(month);
-  }
-
-  // add up total costs
-  totalCost += totalInterest + loan;
-  // creat an object to store the data for the main page header
-  let headerData = {
-    monthlyPayment: `$${monthlyPayment.toFixed(2)}`,
-    totalPrincipal: `$${totalPrincipal.toFixed(2)}`,
-    totalInterest: `$${totalInterest.toFixed(2)}`,
-    totalCost: `$${totalCost.toFixed(2)}`,
-  };
-  //pass data to displayData to output results on the screen
-  displayData(scheduleData, headerData);
-}
-
-//custom display function
-function displayData(scheduleData, headerData) {
-  // get the monthly payment
-  let headerPayment = document.getElementById("monthlyPayment");
-  // set the inner HTML to the monthly payment
-  headerPayment.innerHTML = headerData.monthlyPayment;
-  // get the total principal
-  let headerPrincipal = document.getElementById("totalPrincipal");
-  // set the inner HTMl
-  headerPrincipal.innerHTML = headerData.totalPrincipal;
-  let headerInterest = document.getElementById("totalInterest");
-  // set the inner HTML
-  headerInterest.innerHTML = headerData.totalInterest;
-  let headerCost = document.getElementById("totalCost");
-  // set the inner HTML
-  headerCost.innerHTML = headerData.totalCost;
-
-  //get the table body element from the page
-  let tableBody = document.getElementById("results");
-  //get the template row
-  let templateRow = document.getElementById("lsTemplate");
-  // get the full table element to change the visibility and show the results
-  let fullTable = document.getElementById("table");
-  // loop over the array and create a table row for each item.
-  for (let i = 0; i < scheduleData.length; i++) {
-    //   //add the className to the element
-    //   //imports template as a document fragment to make a copy of the template in memory so it can be modified and added into the table tag in the HTML, content is the tr tag nested inside the template
-    let tableRow = document.importNode(templateRow.content, true);
-    //   // grab the tds and put them into the array
-    let rowCols = tableRow.querySelectorAll("td");
-
-    // set the data for each column
-
-    rowCols[0].textContent = scheduleData[i].month;
-
-    rowCols[1].textContent = scheduleData[i].payment;
-
-    rowCols[2].textContent = scheduleData[i].interest;
-
-    rowCols[3].textContent = scheduleData[i].principal;
-
-    rowCols[4].textContent = scheduleData[i].total;
-
-    // add the template to the document
-    tableBody.appendChild(tableRow);
-    fullTable.classList.remove("invisible");
-  }
-}
+                    // write a mortgage loan calculator that takes loan amount, months, and interest rate and prints out the amorization schedule which includes month by month the month, payment, principal, interest, total interest, and balance remaining
+                    
+                    // refresh button
+                    function refreshApp() {
+                      location.reload();
+                    }
+                    
+                    // write a function that gets all of the values
+                    function getValues() {
+                      // get the loan value
+                      let loan = document.getElementById("loanValue").value;
+                      // get the term value
+                      let term = document.getElementById("termValue").value;
+                      // get the interest rate value
+                      let rate = document.getElementById("interestValue").value;
+                      // convert values to integers
+                      loan = parseInt(loan);
+                      term = parseInt(term);
+                      rate = parseInt(rate);
+                      // test if values are integers
+                      if (
+                        Number.isInteger(loan) &&
+                        Number.isInteger(term) &&
+                        Number.isInteger(rate)
+                      ) {
+                        // call the calculate function
+                        calculateValues(loan, term, rate);
+                      } else {
+                        alert("You must enter only integers");
+                      }
+                    }
+                    
+                    function calculateValues(loan, term, rate) {
+                      // create the array of data showing the amorization schedule for each month
+                      let scheduleData = [];
+                      // Total Monthly Payment = (amount loaned) * (interestRate/1200) / (1 – (1 + interestRate/1200)
+                      let monthlyPayment =
+                        (loan * (rate / 1200)) / (1 - (1 + rate / 1200) ** -term);
+                      // Remaining Balance before the very first month equals the amount of the loan.
+                      let remainingBalance = loan;
+                      //Create variables to store the calculations
+                      let interestPayment = 0;
+                      let principalPayment = 0;
+                      let totalInterest = 0;
+                      let totalCost = 0;
+                      let totalPrincipal = 0;
+                    
+                      // loop through the length of the term and calculate monthly data
+                      for (let i = 1; i <= term; i++) {
+                        // At end each month, Remaining Balance = Previous Remaining Balance - principal payments
+                        remainingBalance = remainingBalance - principalPayment;
+                        // keep from going below zero
+                        if (remainingBalance <= 0) {
+                          remainingBalance = 0;
+                        }
+                        // calculate interestPayment
+                        interestPayment = remainingBalance * (rate / 1200);
+                        // calculate principal payment
+                        principalPayment = monthlyPayment - interestPayment;
+                        // add up the total interest
+                        totalInterest += interestPayment;
+                        // add up the total principal
+                        totalPrincipal += principalPayment;
+                        //create data objects for each month
+                        const month = {
+                          month: i,
+                          payment: monthlyPayment.toFixed(2),
+                          interest: interestPayment.toFixed(2),
+                          principal: principalPayment.toFixed(2),
+                          total: remainingBalance.toFixed(2)
+                        };
+                        // push each month object to the scheduleData array
+                        scheduleData.push(month);
+                      }
+                    
+                      // add up total costs
+                      totalCost += totalInterest + loan;
+                      // creat an object to store the data for the main page header
+                      let headerData = {
+                        monthlyPayment: `$${monthlyPayment.toFixed(2)}`,
+                        totalPrincipal: `$${totalPrincipal.toFixed(2)}`,
+                        totalInterest: `$${totalInterest.toFixed(2)}`,
+                        totalCost: `$${totalCost.toFixed(2)}`
+                      };
+                      //pass data to displayData to output results on the screen
+                      displayData(scheduleData, headerData);
+                    }
+                    
+                    //custom display function
+                    function displayData(scheduleData, headerData) {
+                      // get the monthly payment
+                      let headerPayment = document.getElementById("monthlyPayment");
+                      // set the inner HTML to the monthly payment
+                      headerPayment.innerHTML = headerData.monthlyPayment;
+                      // get the total principal
+                      let headerPrincipal = document.getElementById("totalPrincipal");
+                      // set the inner HTMl
+                      headerPrincipal.innerHTML = headerData.totalPrincipal;
+                      let headerInterest = document.getElementById("totalInterest");
+                      // set the inner HTML
+                      headerInterest.innerHTML = headerData.totalInterest;
+                      let headerCost = document.getElementById("totalCost");
+                      // set the inner HTML
+                      headerCost.innerHTML = headerData.totalCost;
+                    
+                      //get the table body element from the page
+                      let tableBody = document.getElementById("results");
+                      //get the template row
+                      let templateRow = document.getElementById("lsTemplate");
+                      // get the full table element to change the visibility and show the results
+                      let fullTable = document.getElementById("table");
+                      // loop over the array and create a table row for each item.
+                      for (let i = 0; i < scheduleData.length; i++) {
+                        //   //add the className to the element
+                        //   //imports template as a document fragment to make a copy of the template in memory so it can be modified and added into the table tag in the HTML, content is the tr tag nested inside the template
+                        let tableRow = document.importNode(templateRow.content, true);
+                        //   // grab the tds and put them into the array
+                        let rowCols = tableRow.querySelectorAll("td");
+                    
+                        // set the data for each column
+                    
+                        rowCols[0].textContent = scheduleData[i].month;
+                    
+                        rowCols[1].textContent = scheduleData[i].payment;
+                    
+                        rowCols[2].textContent = scheduleData[i].interest;
+                    
+                        rowCols[3].textContent = scheduleData[i].principal;
+                    
+                        rowCols[4].textContent = scheduleData[i].total;
+                    
+                        // add the template to the document
+                        tableBody.appendChild(tableRow);
+                        fullTable.classList.remove("invisible");
+                      }
+                    }
+                    
 
                     
                   </code>
@@ -242,15 +245,25 @@ function displayData(scheduleData, headerData) {
             <p>This function refreshes the page. The data from the header resets to default and the amorization schedule disappears. This function is called when the reset button is pressed. In the HTML document the reset button has an event listener attached that calls this function when the click event is fired.</p>
 
             <h5>The <strong>getValues()</strong> Function</h5>
-            <p>The function first grabs all of the input values the user types in. These input values are the loan amount, term, and interest rate. Using <strong>getElementById()</strong> and grabbing the values we store that inputs into variables using the same name (loan, term, rate) to make it easy to identify what the variables are. Next using <strong>parseInt()</strong> the variables are converted to from string to integer values. An if statement runs to check that all of the variables are integers. The values must be integers for running the calculations. If the values are integers then the variables are passed to the <strong>calculateValues()</strong> function. If they are not integers an alert will pop up instructing the user to enter only integer values. Since the tests pass and the values are integers the program calls the <strong>calculateValues()</strong> function with loan, term, and rate as arguments.</p>
+            <p>The function first grabs all of the input values the user types in. These input values are the loan amount, term, and interest rate. Using <strong>getElementById()</strong> and grabbing the values we store the inputs into variables using the same name (loan, term, rate) to make it easy to identify what the variables are. Next using <strong>parseInt()</strong> the variables are converted from string to integer values. An if statement runs to check that all of the variables are integers. The values must be integers for running the calculations. If the values are integers then the variables are passed to the <strong>calculateValues()</strong> function. If they are not integers an alert will pop up instructing the user to enter only integer values. Since the tests pass and the values are integers the program calls the <strong>calculateValues()</strong> function with loan, term, and rate as arguments.</p>
 
             <h5>The <strong>calculateValues()</strong> Function</h5>
             <p>First the <strong>scheduleData</strong> variable is created and assigned an empty array. This will hold objects for each month of the loan. Next the <strong>monthlyPayment</strong> variable is created and the formula for calculating the monthly payment is added to the variable. A <strong>remainingBalance</strong> variable is set to the value of the loan variable for now, but this will change later. Next the <strong>interestPayment, principalPayment, totalInterest, totalCost, and totalPrincipal</strong> variables are created and initialized to zero. These variables will have different values when the loop runs and makes calculations.</p>
 
-            <p>Now that all of the variables to hold the calculations have been created we can run a loop. A for loop is created and starts at 1 and increments all the way to length of the <strong>term</strong> variable. The loop runs calculations for each variable that was previously created. Next an object called <strong>month</strong> is created. This object holds the <strong>month, payment, interest, principal, and total</strong> for each month of the loan. That object is then pushed to the <strong>scheduleData</strong> array. This completes one iteration of the loop.</p>
+            <p>Now that all of the variables to hold the calculations have been created, we can run a loop. A for loop is created and starts at 1 and increments all the way to length of the <strong>term</strong> variable. The loop runs calculations for each variable that was previously created. Next an object called <strong>month</strong> is created. This object holds the <strong>month, payment, interest, principal, and total</strong> for each month of the loan. That object is then pushed to the <strong>scheduleData</strong> array. This completes one iteration of the loop.</p>
 
-            <p>After the loop runs every iteration, </p>
-          </div>
+            <p>After the loop runs every iteration, we exit the loop and add the total interest plus the loan value to the <strong>totalCost</strong> variable. Next a variable called <strong>headerData</strong> is created and assigned an object. This object will house the  monthly payment, total principal, total interest, and total cost data that will display in the header when the calculate button is clicked. The final line of code in this function is a call to the <strong>displayData</strong> function with the <strong>scheduleData</strong> and <strong>headerData</strong> variables passed in as arguments.</p> 
+            
+            <h5>The <strong>displayData()</strong> Function</h5>
+            <p>This function has two parameters, <strong>scheduleData</strong> and <strong>headerData</strong>. The first thing that is displayed on the page is the header data. To accomplish this the default monthly payment, total principal, total interest, and total cost elements are targeted by their id with <strong>getElementById()</strong> and stored in variables. Now all we have to do is change the inner HTML to the respective property in the <strong>headerData</strong> object. Now the data is displayed in the header section on the page. </p>
+
+            <p>Now the only thing left to do is display the amorization schedule for the loan. First we target the body of the table that is in the HTML document. The element is targeted by its "results" id and stored in the variable <strong>tableBody</strong>. Next the template row is targeted by its "lsTemplate" id and stored in the <strong>templateRow</strong> variable. Next the entire table element is targeted by its "table" id and stored in the <strong>fullTable</strong> variable. Now that we have all of our main variables ready a loop is then created. A for loop runs starting at zero and ends at the length of the <strong>scheduleData</strong> array incrementing by one for each iteration. </p>
+
+            <p>For each iteration a <strong>tableRow</strong> and <strong>rowCols</strong> variable are created. The <strong>tableRow</strong> variable represents the row. Inside of the variable <strong>document.importNode(templateRow.content, true)</strong> runs. This imports the template as a document fragment to make a copy of the template in memory so it can be modified and added into the table tag in the HTML. Next a <strong>rowCols</strong> variable is created. Using <strong>querySelectorAll()</strong> on the "td" element we grab all of the <strong>td</strong> elements. Now the indvidual columns can be modified.</p>
+
+            <p>We will now start filling in the data to all five columns of the table. To accomplish this we start by targeting the first td element of <strong>rowCols</strong> using bracket notation. Now that we have the first column the textContent is targeted and set to month property of the the first object in the <strong>scheduleData</strong> array. This continues for the rest of the four columns in the first row. This same process is continued for the rest of the rows and columns in the table until the entire table is constructed with all of the data from the 60 objects in the <strong>scheduleData</strong> array. The last step is to add the template to the document. The <Strong>appendChild()</Strong> method is used on the table body element. The <strong>tableRow</strong> variable with the template is appended to the table body. Finally, to make the table visible the <strong>fullTable</strong> variable is targeted and the class list "invisible" is removed. This enables the schedule to be fully visible. There is now an amorization schedule of the loan on the screen!</p> 
+           </div>
+           
         </div>
       </div>
     </main>
